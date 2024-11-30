@@ -1,15 +1,3 @@
-# binnacle-python
-
-Easy to use Infra and Tests automation Tool.
-
-## Install
-
-
-## Usage
-
-ReST APIs testing example,
-
-```python
 from binnacle.plugins.http import *
 
 base_url("http://localhost:5001")
@@ -27,28 +15,11 @@ data = get("/api/v1/folders")
 debug(data)
 folders = validated_json(data)
 
-show_summary()
-```
-
-To execute commands,
-
-```python
-from binnacle.plugins.commands import *
+compare_equal(len(folders), 4)
+compare_not_equal(100, 100)
 
 validated_json('{"name": 100}')
 
 command_run("ls /tmp")
-show_summary()
-```
-
-Comparision:
-
-```python
-from binnacle.plugins.compare import *
-
-compare_equal(len(folders), 4)
-compare_not_equal(100, 100)
 
 show_summary()
-```
-
