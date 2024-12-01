@@ -1,8 +1,7 @@
-import inspect
-import json
-from datetime import datetime
 import os
-import subprocess
+import inspect
+from datetime import datetime
+from functools import wraps
 
 import requests
 from termcolor import colored
@@ -133,3 +132,21 @@ def debug(msg):
     msg_data = f"{msg}"
     for line in msg_data.split("\n"):
         print(colored(f"# {line}", debug_color()))
+
+
+def binnacle_task(func):
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        task = Task.from_frameinfo()
+        kwargs["task"] = task
+        ret = None
+
+        try:
+            ret = func(*args, **kwargs)
+        except Exception as ex:
+            debug(ex)
+
+        summary.add_completed_task(task)
+        return ret
+
+    return wrapper

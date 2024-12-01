@@ -1,4 +1,6 @@
-from binnacle.core import *
+import subprocess
+
+from binnacle.core import binnacle_task
 
 
 def escaped_cmd(cmd):
@@ -7,7 +9,7 @@ def escaped_cmd(cmd):
 
 def escaped_ssh_cmd(cmd):
     cmd = f"/bin/bash -c '{escaped_cmd(cmd)}'"
-    cmd = _command_config.sudo ? f"sudo {cmd}" : cmd
+    cmd = f"sudo {cmd}" if _command_config.sudo else cmd
 
     return escaped_cmd(cmd)
 
@@ -26,13 +28,13 @@ def full_cmd(cmd):
 
     return cmd
 
-def command_run(cmd, ret = 0):
-    task = Task.from_frameinfo()
+
+@binnacle_task
+def command_run(cmd, ret = 0, task=None):
     result = subprocess.run(cmd, shell=True, capture_output=True, universal_newlines=True)
     task.ok = result.returncode == ret
     if not task.ok:
         task.info(f"Return code: {result.returncode}\n" + result.stderr.strip())
-    summary.add_completed_task(task)
     return result.stdout
 
 

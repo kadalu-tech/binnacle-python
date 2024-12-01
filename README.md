@@ -10,7 +10,7 @@ Easy to use Infra and Tests automation Tool.
 ReST APIs testing example,
 
 ```python
-from binnacle.plugins.http import *
+from binnacle import *
 
 base_url("http://localhost:5001")
 
@@ -33,7 +33,7 @@ show_summary()
 To execute commands,
 
 ```python
-from binnacle.plugins.commands import *
+from binnacle import *
 
 validated_json('{"name": 100}')
 
@@ -44,7 +44,7 @@ show_summary()
 Comparision:
 
 ```python
-from binnacle.plugins.compare import *
+from binnacle import *
 
 compare_equal(len(folders), 4)
 compare_not_equal(100, 100)

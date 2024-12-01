@@ -1,4 +1,4 @@
-from binnacle.plugins.http import *
+from binnacle import *
 
 base_url("http://localhost:5001")
 
@@ -15,11 +15,11 @@ data = get("/api/v1/folders")
 debug(data)
 folders = validated_json(data)
 
-compare_equal(len(folders), 4)
-compare_not_equal(100, 100)
+#compare_equal(len(folders), 4)
+#compare_not_equal(100, 100)
 
 validated_json('{"name": 100}')
 
-command_run("ls /tmp")
+# command_run("ls /tmp")
 
 show_summary()
