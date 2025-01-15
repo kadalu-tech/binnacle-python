@@ -38,14 +38,14 @@ def full_url(url):
 
 @binnacle_task
 def post(url, status = 200, task=None):
-    resp = requests.get(full_url(url), headers=_headers)
+    resp = requests.post(full_url(url), headers=_headers)
     task.ok = resp.status_code == status
     return resp
 
 
 @binnacle_task
 def put(url, status = 200, task=None):
-    resp = requests.get(full_url(url), headers=_headers)
+    resp = requests.put(full_url(url), headers=_headers)
     task.ok = resp.status_code == status
     return resp
 
@@ -60,7 +60,7 @@ def get(url, status = 200, task=None):
 
 @binnacle_task
 def delete(url, status = 204, task=None):
-    resp = requests.get(full_url(url), headers=_headers)
+    resp = requests.delete(full_url(url), headers=_headers)
     task.ok = resp.status_code == status
     return resp
 
