@@ -7,22 +7,22 @@ from binnacle.core import binnacle_task
 _url = ""
 _headers = {}
 
-def base_url(url):
+def http_base_url(url):
     global _url
     _url = url
 
 
-def set_header(name, value):
+def http_set_header(name, value):
     global _headers
     _headers[name] = f"{value}"
 
 
-def remove_header(name):
+def http_remove_header(name):
     global _headers
     del _headers[name]
 
 
-def headers(values):
+def http_headers(values):
     global _headers
     _headers = {}
     for name, value in values.items():
