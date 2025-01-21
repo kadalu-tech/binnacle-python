@@ -7,22 +7,22 @@ from binnacle.core import binnacle_task
 _url = ""
 _headers = {}
 
-def base_url(url):
+def http_base_url(url):
     global _url
     _url = url
 
 
-def set_header(name, value):
+def http_set_header(name, value):
     global _headers
     _headers[name] = f"{value}"
 
 
-def remove_header(name):
+def http_remove_header(name):
     global _headers
     del _headers[name]
 
 
-def headers(values):
+def http_headers(values):
     global _headers
     _headers = {}
     for name, value in values.items():
@@ -37,21 +37,21 @@ def full_url(url):
 
 
 @binnacle_task
-def post(url, status = 200, task=None):
+def http_post(url, status = 200, task=None):
     resp = requests.post(full_url(url), headers=_headers)
     task.ok = resp.status_code == status
     return resp
 
 
 @binnacle_task
-def put(url, status = 200, task=None):
+def http_put(url, status = 200, task=None):
     resp = requests.put(full_url(url), headers=_headers)
     task.ok = resp.status_code == status
     return resp
 
 
 @binnacle_task
-def get(url, status = 200, task=None):
+def http_get(url, status = 200, task=None):
     resp = requests.get(full_url(url), headers=_headers)
     task.debug(f"URL: GET {url}\nExpected Status: {status}\nActual Status: {resp.status_code}")
     task.ok = resp.status_code == status
@@ -59,7 +59,7 @@ def get(url, status = 200, task=None):
 
 
 @binnacle_task
-def delete(url, status = 204, task=None):
+def http_delete(url, status = 204, task=None):
     resp = requests.delete(full_url(url), headers=_headers)
     task.ok = resp.status_code == status
     return resp
