@@ -8,3 +8,4 @@ command_container("server1")
 command_run("echo 'Hello World!' > /root/reports.txt")
 command_run("stat /root/reports.txt") #report exixts
 command_run("stat /root/reports1.txt 2>/dev/null && echo 'File exists' || echo 'File does not exist'") #report1 does not exixt
+

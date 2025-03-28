@@ -4,3 +4,4 @@ from binnacle import *
 validated_json('{"name": 100}')
 command_run("ls /tmp")
 command_run("stat /home/ubuntu/reports.pdf")
+
