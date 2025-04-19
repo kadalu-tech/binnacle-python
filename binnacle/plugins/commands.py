@@ -8,7 +8,6 @@ def escaped_cmd(cmd):
 
 
 def escaped_ssh_cmd(cmd):
-    
     cmd = f"/bin/bash -c '{escaped_cmd(cmd)}'"
     cmd = f"sudo {cmd}" if _command_config.sudo else cmd
 
@@ -16,7 +15,6 @@ def escaped_ssh_cmd(cmd):
 
 
 def full_cmd(cmd):
-    
     if _command_config.mode in ["", "local"] or _command_config.node in ["", "local"]:
         return cmd
     
@@ -34,7 +32,6 @@ def full_cmd(cmd):
 
 @binnacle_task
 def command_run(cmd, ret = 0, task=None):
- 
     cmd = full_cmd(cmd)
     result = subprocess.run(cmd, shell=True, capture_output=True, universal_newlines=True)
     task.ok = result.returncode == ret
